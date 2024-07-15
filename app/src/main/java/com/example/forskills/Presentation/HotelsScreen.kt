@@ -6,5 +6,5 @@ import androidx.navigation.NavController
 
 @Composable
 fun HotelsScreen(navController: NavController) {
-    Text(text = "Details Screen")
+    Text(text = "Hotels Screen")
 }
