@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">ForSkills</string>
-    <string name="airTickets">Air Tickets</string>
-    <string name="hotels">Hotels</string>
-    <string name="inShort">In Short</string>
-    <string name="subscribes">Subscribes</string>
-    <string name="profile">Profile</string>
+    <string name="airTickets">Авиабилеты</string>
+    <string name="hotels">Отели</string>
+    <string name="inShort">Короче</string>
+    <string name="subscribes">Подписки</string>
+    <string name="profile">Профиль</string>
 </resources>
