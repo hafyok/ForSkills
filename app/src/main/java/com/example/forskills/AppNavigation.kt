@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.forskills.Presentation.AirTicketsScreen
+import com.example.forskills.Presentation.AirTicket.AirTicketsScreen
 import com.example.forskills.Presentation.HotelsScreen
 import com.example.forskills.Presentation.InShortScreen
 import com.example.forskills.Presentation.ProfileScreen

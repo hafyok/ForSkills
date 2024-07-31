@@ -5,4 +5,6 @@
     <string name="inShort">Короче</string>
     <string name="subscribes">Подписки</string>
     <string name="profile">Профиль</string>
+
+    <string name="cheapTickets">Поиск дешевых \nавиабилетов</string>
 </resources>
