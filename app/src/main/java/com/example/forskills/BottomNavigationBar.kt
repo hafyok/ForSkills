@@ -1,13 +1,11 @@
 package com.example.forskills
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -16,6 +14,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.forskills.ui.theme.Black
+import com.example.forskills.ui.theme.Blue
+import com.example.forskills.ui.theme.Grey6
+import com.example.forskills.ui.theme.White
+
+//import com.example.forskills.ui.theme.*
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -26,7 +30,9 @@ fun BottomNavigationBar(navController: NavController) {
         BottomNavItem.Subscribes,
         BottomNavItem.Profile
     )
-    BottomAppBar {
+    BottomAppBar(
+        containerColor = Black
+    ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
@@ -34,25 +40,25 @@ fun BottomNavigationBar(navController: NavController) {
                 icon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = item.icon),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = if (currentRoute == item.route) Blue else Grey6 // Orange if selected, White if not
                     )
                 },
                 label = {
                     Text(
                         text = stringResource(id = item.title),
                         fontSize = 9.sp,
-                        maxLines = 1
+                        maxLines = 1,
+                        color = if (currentRoute == item.route) Blue else Grey6 // Orange if selected, White if not
                     )
                 },
                 selected = currentRoute == item.route,
-                modifier = Modifier.fillMaxSize(),
+                selectedContentColor = Blue,
+                unselectedContentColor = White,
                 onClick = {
                     navController.navigate(item.route) {
-                        // Avoid multiple copies of the same destination when reselecting the same item
                         launchSingleTop = true
-                        // Restore state when reselecting a previously selected item
                         restoreState = true
-                        // Pop up to the start destination of the graph to avoid building up a large stack of destinations
                         popUpTo(navController.graph.startDestinationId) {
                             saveState = true
                         }
