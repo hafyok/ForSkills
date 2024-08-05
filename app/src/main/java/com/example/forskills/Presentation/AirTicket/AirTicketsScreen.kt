@@ -6,6 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,8 +51,27 @@ fun AirTicketsScreen(navController: NavController) {
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Start,
             maxLines = 2,
-            modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 24.dp)
         )
+
+        val offers = listOf(
+            listOf("Die Antwoord", "Будапешт", R.drawable.dora, "22 264"),
+            listOf("Socrat& Lera", "Санкт-Петербург", R.drawable.socrat_lera, "2 390"),
+            listOf("Лампабикт", "Москва", R.drawable.lampabict, "2 390"),
+        )
+        LazyRow() {
+            items(offers) { offer ->
+                OfferItem(
+                    title = offer[0].toString(),
+                    city = offer[1].toString(),
+                    image = offer[2].toString().toInt(),
+                    price = offer[3].toString()
+                )
+                Spacer(modifier = Modifier.width(68.dp))
+            }
+        }
 
     }
 }
