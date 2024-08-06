@@ -40,10 +40,10 @@ fun SearchForm(){
     ) {
         Card(
             colors = CardDefaults.cardColors(containerColor = Grey4),
-            shape = RoundedCornerShape(16.dp),
+            //shape = RoundedCornerShape(16.dp),
             modifier = Modifier
                 .padding(16.dp)
-                .shadow(4.dp)
+                .shadow(4.dp, shape = RoundedCornerShape(16.dp))
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -78,3 +78,4 @@ fun SearchForm(){
         }
     }
 }
+

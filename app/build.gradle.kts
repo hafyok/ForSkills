@@ -71,4 +71,8 @@ dependencies {
 
     // Navigation component for Compose
     implementation(libs.androidx.navigation.compose.v260alpha04)
+
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
+    implementation(libs.retrofit)
 }
