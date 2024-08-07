@@ -14,18 +14,17 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.forskills.R
-import com.example.forskills.ui.theme.Grey6
-import com.example.forskills.ui.theme.White
+import com.example.forskills.ui.theme.*
 
 @Composable
-fun OfferItem(title: String, city: String, image: Int, price: String){
+fun OfferItem(title: String, city: String, image: Int, price: String) {
+    val id = IMAGE_ID.chooseImage(image)
     Column() {
         Image(
-            painter = painterResource(id = image),
+            painter = painterResource(id = id),
             contentDescription = null,
             modifier = Modifier.size(132.dp)
         )
@@ -46,8 +45,11 @@ fun OfferItem(title: String, city: String, image: Int, price: String){
     }
 }
 
-@Preview
-@Composable
-fun PreviewOfferItem(){
-    OfferItem("Die Antwoord", "Будапешт", R.drawable.dora, "25 000")
+object IMAGE_ID {
+    fun chooseImage(id: Int) = when (id) {
+            1 -> R.drawable.dora
+            2 -> R.drawable.socrat_lera
+            3 -> R.drawable.lampabict
+        else -> {R.drawable.ic_air_offers}
+    }
 }

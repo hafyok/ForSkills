@@ -1,5 +1,6 @@
 package com.example.forskills.Presentation.AirTicket
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,22 +10,30 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.forskills.R
 
 @Composable
-fun AirTicketsScreen(navController: NavController) {
+fun AirTicketsScreen(navController: NavController, viewModel: AirTicketViewModel) {
+    val offers = viewModel.offers.collectAsState()
+    val isLoading = viewModel.isLoading.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.getOffers()
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
@@ -56,30 +65,24 @@ fun AirTicketsScreen(navController: NavController) {
                 .padding(vertical = 24.dp)
         )
 
-        val offers = listOf(
-            listOf("Die Antwoord", "Будапешт", R.drawable.dora, "22 264"),
-            listOf("Socrat& Lera", "Санкт-Петербург", R.drawable.socrat_lera, "2 390"),
-            listOf("Лампабикт", "Москва", R.drawable.lampabict, "2 390"),
-        )
-        LazyRow() {
-            items(offers) { offer ->
-                OfferItem(
-                    title = offer[0].toString(),
-                    city = offer[1].toString(),
-                    image = offer[2].toString().toInt(),
-                    price = offer[3].toString()
-                )
-                Spacer(modifier = Modifier.width(68.dp))
+        if (isLoading.value) {
+            // Отображаем индикатор загрузки, пока данные загружаются
+            CircularProgressIndicator()
+        } else {
+            // Отображаем загруженные данные
+            LazyRow {
+                Log.d("Offers", offers.value.toString())
+                items(offers.value) { offer ->
+                    OfferItem(
+                        title = offer.title.toString(),
+                        city = offer.town.toString(),
+                        image = offer.id.toString().toInt(),
+                        price = offer.price?.value.toString()
+                    )
+                    Spacer(modifier = Modifier.width(68.dp))
+                }
             }
         }
 
     }
-}
-
-
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewAirTicketsScreen() {
-    val navController = rememberNavController()
-    AirTicketsScreen(navController)
 }
